@@ -25,9 +25,9 @@ const fromSupabase = async (query) => {
 |------------|-------------|--------|----------|
 | id         | int8        | number | true     |
 | created_at | timestamptz | string | true     |
-| name       | text        | string | true     |
-| date       | date        | string | true     |
-| venue      | int8        | number | true     |
+| name       | text        | string | false    |
+| date       | date        | string | false    |
+| venue      | int8        | number | false    |
 
 ### comments
 
@@ -35,9 +35,8 @@ const fromSupabase = async (query) => {
 |------------|-------------|--------|----------|
 | id         | int8        | number | true     |
 | created_at | timestamptz | string | true     |
-| content    | text        | string | true     |
-| event_id   | int8        | number | true     |
-| highlighted| boolean     | boolean| true     |
+| content    | text        | string | false    |
+| event_id   | int8        | number | false    |
 
 ### venues
 
@@ -45,13 +44,13 @@ const fromSupabase = async (query) => {
 |------------|-------------|--------|----------|
 | id         | int8        | number | true     |
 | created_at | timestamptz | string | true     |
-| name       | text        | string | true     |
-| capacity   | int8        | number | true     |
-| type       | text        | string | true     |
+| name       | text        | string | false    |
+| capacity   | int8        | number | false    |
+| type       | text        | string | false    |
 
 */
 
-// Events Hooks
+// Hooks for events table
 export const useEvents = () => useQuery({
     queryKey: ['events'],
     queryFn: () => fromSupabase(supabase.from('events').select('*')),
@@ -92,7 +91,7 @@ export const useDeleteEvent = () => {
     });
 };
 
-// Comments Hooks
+// Hooks for comments table
 export const useComments = () => useQuery({
     queryKey: ['comments'],
     queryFn: () => fromSupabase(supabase.from('comments').select('*')),
@@ -133,7 +132,7 @@ export const useDeleteComment = () => {
     });
 };
 
-// Venues Hooks
+// Hooks for venues table
 export const useVenues = () => useQuery({
     queryKey: ['venues'],
     queryFn: () => fromSupabase(supabase.from('venues').select('*')),
