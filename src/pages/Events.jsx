@@ -1,4 +1,4 @@
-import { Container, Heading, VStack, Text, Box, Link, Button, HStack } from "@chakra-ui/react";
+import { Container, Heading, VStack, Text, Box, Link, Button, HStack, Spinner, Alert, AlertIcon } from "@chakra-ui/react";
 import { useEvents, useDeleteEvent } from "../integrations/supabase/index.js";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 
@@ -11,8 +11,13 @@ const Events = () => {
     deleteEvent.mutate(id);
   };
 
-  if (isLoading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error loading events</Text>;
+  if (isLoading) return <Spinner size="xl" />;
+  if (error) return (
+    <Alert status="error">
+      <AlertIcon />
+      Error loading events
+    </Alert>
+  );
 
   return (
     <Container maxW="container.md" py={8}>

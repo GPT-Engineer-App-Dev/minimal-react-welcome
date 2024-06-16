@@ -1,4 +1,4 @@
-import { Container, Heading, VStack, Text, Box, Input, Button } from "@chakra-ui/react";
+import { Container, Heading, VStack, Text, Box, Input, Button, Spinner, Alert, AlertIcon } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useEvent, useComments, useAddComment } from "../integrations/supabase/index.js";
 import { useState } from "react";
@@ -15,9 +15,19 @@ const EventDetails = () => {
     setCommentContent("");
   };
 
-  if (eventLoading || commentsLoading) return <Text>Loading...</Text>;
-  if (eventError) return <Text>Error loading event details</Text>;
-  if (commentsError) return <Text>Error loading comments</Text>;
+  if (eventLoading || commentsLoading) return <Spinner />;
+  if (eventError) return (
+    <Alert status="error">
+      <AlertIcon />
+      Error loading event details
+    </Alert>
+  );
+  if (commentsError) return (
+    <Alert status="error">
+      <AlertIcon />
+      Error loading comments
+    </Alert>
+  );
 
   return (
     <Container maxW="container.md" py={8}>

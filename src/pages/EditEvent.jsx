@@ -1,4 +1,4 @@
-import { Container, Heading, VStack, Input, Button, useToast } from "@chakra-ui/react";
+import { Container, Heading, VStack, Input, Button, useToast, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useEvent, useUpdateEvent } from "../integrations/supabase/index.js";
 import { useParams, useNavigate } from "react-router-dom";
